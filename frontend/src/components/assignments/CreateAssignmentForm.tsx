@@ -207,7 +207,7 @@ export function CreateAssignmentForm() {
           </div>
         </div>
 
-        <div className="mb-4 overflow-x-auto">
+        <div className="mb-4 hidden overflow-x-auto md:block">
           <table className="w-full min-w-[500px] text-sm">
             <thead>
               <tr className="border-b border-gray-100 text-left text-gray-500">
@@ -265,6 +265,61 @@ export function CreateAssignmentForm() {
               ))}
             </tbody>
           </table>
+        </div>
+
+        <div className="mb-4 space-y-3 md:hidden">
+          {questionTypes.map((row) => (
+            <div key={row.id} className="rounded-2xl border border-gray-200 bg-white p-4">
+              <div className="mb-3 flex items-center gap-2">
+                <select
+                  value={row.type}
+                  onChange={(e) =>
+                    updateQuestionType(row.id, { type: e.target.value })
+                  }
+                  className="h-10 flex-1 rounded-xl border border-gray-200 px-3 text-sm focus:border-veda-orange focus:outline-none"
+                >
+                  {QUESTION_TYPE_OPTIONS.map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
+                </select>
+                <button
+                  type="button"
+                  onClick={() => removeQuestionType(row.id)}
+                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 text-gray-400 hover:text-red-500"
+                  aria-label="Remove row"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="rounded-xl border border-gray-100 bg-gray-50 p-2.5">
+                  <p className="mb-2 text-xs font-medium text-gray-500">No. of Questions</p>
+                  <div className="flex justify-center">
+                    <StepperInput
+                      value={row.count}
+                      onChange={(count) =>
+                        updateQuestionType(row.id, { count })
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="rounded-xl border border-gray-100 bg-gray-50 p-2.5">
+                  <p className="mb-2 text-xs font-medium text-gray-500">Marks</p>
+                  <div className="flex justify-center">
+                    <StepperInput
+                      value={row.marksPerQuestion}
+                      onChange={(marksPerQuestion) =>
+                        updateQuestionType(row.id, { marksPerQuestion })
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
         <button
@@ -329,11 +384,11 @@ export function CreateAssignmentForm() {
       </div>
 
       {/* Bottom Buttons */}
-      <div className="mt-8 flex items-center justify-between">
+      <div className="mt-8 flex items-center justify-between gap-3">
         <button
           type="button"
           onClick={() => (step > 1 ? setStep(1) : router.back())}
-          className="flex items-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-medium text-[#303030] shadow-sm transition hover:bg-gray-50"
+          className="flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-medium text-[#303030] shadow-sm transition hover:bg-gray-50 sm:px-7"
         >
           <ChevronLeft className="h-4 w-4" />
           Previous
@@ -343,7 +398,7 @@ export function CreateAssignmentForm() {
           type="button"
           disabled={submitting}
           onClick={handleSubmit}
-          className="flex items-center gap-2 rounded-full bg-[#111111] px-8 py-3 text-sm font-medium text-white transition hover:bg-black disabled:opacity-60"
+          className="flex items-center gap-2 rounded-full bg-[#111111] px-6 py-3 text-sm font-medium text-white transition hover:bg-black disabled:opacity-60 sm:px-8"
         >
           {submitting ? "Creating…" : "Next"}
           <ChevronRight className="h-4 w-4" />
