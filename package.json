@@ -12,6 +12,6 @@
     "build": "npm run build --prefix backend && npm run build --prefix frontend"
   },
   "devDependencies": {
-    "concurrently": "^9.1.2"
+    "concurrently": "^9.2.1"
   }
 }
