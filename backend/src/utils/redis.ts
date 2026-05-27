@@ -1,16 +1,16 @@
-import Redis from "ioredis";
+import Redis, { RedisOptions }from "ioredis";
 import { env } from "../config/env";
 
 function buildRedisOptions(
   forBullMq: boolean
-): Redis.RedisOptions {
+): RedisOptions {
   const isTls = env.REDIS_URL.startsWith("rediss://");
 
   return {
     maxRetriesPerRequest: forBullMq ? null : 3,
     enableReadyCheck: true,
     reconnectOnError: () => true,
-    retryStrategy: (times) => Math.min(times * 500, 5000),
+    retryStrategy: (times : number) => Math.min(times * 500, 5000),
     connectTimeout: 15000,
     ...(isTls ? { tls: {} } : {}),
   };
