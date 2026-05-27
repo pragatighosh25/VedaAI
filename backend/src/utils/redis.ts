@@ -3,6 +3,25 @@ import { env } from "../config/env";
 
 export const redis = new Redis(env.REDIS_URL, {
   maxRetriesPerRequest: null,
+  enableReadyCheck: true,
+  reconnectOnError: () => true,
+  retryStrategy: (times) => Math.min(times * 500, 5000),
+});
+
+redis.on("connect", () => {
+  console.log("Redis connected");
+});
+
+redis.on("ready", () => {
+  console.log("Redis ready");
+});
+
+redis.on("reconnecting", () => {
+  console.warn("Redis reconnecting...");
+});
+
+redis.on("error", (err) => {
+  console.error("Redis error:", err.message);
 });
 
 export const CACHE_TTL = 3600;

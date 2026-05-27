@@ -104,3 +104,11 @@ process.on("SIGTERM", async () => {
   await worker.close();
   process.exit(0);
 });
+
+process.on("uncaughtException", (err) => {
+  console.error("Worker uncaught exception:", err);
+});
+
+process.on("unhandledRejection", (reason) => {
+  console.error("Worker unhandled rejection:", reason);
+});
