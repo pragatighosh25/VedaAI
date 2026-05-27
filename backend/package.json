@@ -7,7 +7,8 @@
     "worker": "tsx watch src/workers/generationWorker.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "start:worker": "node dist/workers/generationWorker.js"
+    "start:worker": "node dist/workers/generationWorker.js",
+    "start:all": "concurrently \"npm run start\" \"npm run start:worker\""
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
