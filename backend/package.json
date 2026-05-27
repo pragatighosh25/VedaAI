@@ -8,7 +8,7 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "start:worker": "node dist/workers/generationWorker.js",
-    "start:all": "concurrently \"npm run start\" \"npm run start:worker\""
+    "start:all": "node dist/index.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

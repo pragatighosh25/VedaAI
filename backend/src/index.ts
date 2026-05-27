@@ -5,6 +5,11 @@ import { WebSocketServer } from "ws";
 import jwt from "jsonwebtoken";
 import { env } from "./config/env";
 import { connectMongo } from "./utils/mongo";
+import {
+  queueRedis,
+  waitForRedis,
+} from "./utils/redis";
+import { startGenerationWorker } from "./workers/generationWorker";
 import { assignmentRouter } from "./routes/assignments";
 import { errorHandler } from "./middleware/errorHandler";
 import { subscribe } from "./socket/socketManager";
@@ -22,8 +27,24 @@ app.use(
 );
 app.use(express.json({ limit: "2mb" }));
 
-app.get("/health", (_req, res) => {
-  res.json({ status: "ok" });
+app.get("/health", async (_req, res) => {
+  try {
+    await queueRedis.ping();
+    res.json({
+      status: "ok",
+      mongo: "connected",
+      redis: "connected",
+      worker: env.START_WORKER,
+    });
+  } catch (err) {
+    res.status(503).json({
+      status: "degraded",
+      error:
+        err instanceof Error
+          ? err.message
+          : "Health check failed",
+    });
+  }
 });
 
 app.use("/api/assignments", assignmentRouter);
@@ -74,9 +95,27 @@ wss.on("connection", async (ws, req) => {
 
 async function start() {
   await connectMongo();
+  await waitForRedis(queueRedis, "queue");
+
+  if (env.START_WORKER) {
+    startGenerationWorker().catch((err) => {
+      console.error(
+        "Failed to start generation worker:",
+        err
+      );
+    });
+  }
+
   server.listen(env.PORT, () => {
-    console.log(`API running on http://localhost:${env.PORT}`);
-    console.log(`WebSocket on ws://localhost:${env.PORT}/ws`);
+    console.log(
+      `API running on http://localhost:${env.PORT}`
+    );
+    console.log(
+      `WebSocket on ws://localhost:${env.PORT}/ws`
+    );
+    console.log(
+      `Worker in-process: ${env.START_WORKER ? "enabled" : "disabled"}`
+    );
   });
 }
 

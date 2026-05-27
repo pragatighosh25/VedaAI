@@ -14,6 +14,10 @@ const envSchema = z.object({
     .optional()
     .transform((v) => v === "true"),
   FRONTEND_URL: z.string().default("http://localhost:3000"),
+  START_WORKER: z
+    .enum(["true", "false"])
+    .optional()
+    .transform((v) => v !== "false"),
 });
 
 export const env = envSchema.parse(process.env);
