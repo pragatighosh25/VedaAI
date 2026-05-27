@@ -30,6 +30,7 @@ export default function OutputPage() {
   const [loading, setLoading] = useState(true);
   const [regenerating, setRegenerating] = useState(false);
   const [regenerateError, setRegenerateError] = useState<string | null>(null);
+  const [generationError, setGenerationError] = useState<string | null>(null);
 
   const { progress, status, setProgress, reset } = useGenerationStore();
 
@@ -41,10 +42,14 @@ export default function OutputPage() {
       ]);
       setAssignment(assignRes);
       setProgress(paperRes.progress, paperRes.status);
+      setGenerationError(
+        paperRes.error ?? (assignRes.status === "failed" ? assignRes.errorMessage ?? null : null),
+      );
 
       if (paperRes.paper) {
         setPaper(paperRes.paper);
         setAnswerKey(paperRes.answerKey ?? []);
+        setGenerationError(null);
       }
     } catch {
       /* retry on poll */
@@ -145,6 +150,9 @@ export default function OutputPage() {
         {isFailed && (
           <div className="mb-6 rounded-xl bg-red-500/20 p-4 text-center text-red-200">
             <p>Generation failed. Please try again.</p>
+            {generationError && (
+              <p className="mt-2 text-sm text-red-100">{generationError}</p>
+            )}
             <button
               type="button"
               onClick={handleRegenerate}
