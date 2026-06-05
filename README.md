@@ -209,3 +209,6 @@ Difficulty values: `easy` | `medium` | `hard` (displayed as Easy / Moderate / Ch
 - Set `MOCK_AI=true` to demo UI without a Groq key.
 - PDF and AI generation require a completed assignment with validated `questionPaper` in MongoDB.
 
+## License
+
+MIT — built for the VedaAI engineering assignment.

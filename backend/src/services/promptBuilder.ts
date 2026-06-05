@@ -83,7 +83,7 @@ Return ONLY this JSON shape:
   }
 
   if (input.uploadedFileText?.trim()) {
-    prompt += `\n\nReference material from uploaded document:\n${input.uploadedFileText.slice(0, 8000)}`;
+    prompt += `\n\n---\nREFERENCE MATERIAL:\n${input.uploadedFileText}\n---\n\nUse this reference material to:\n1. Generate questions that are directly related to the content\n2. Extract key concepts and topics for questions\n3. Create questions at various difficulty levels based on the material\n4. Ensure questions are contextual and aligned with the document`;
   }
 
   return prompt;

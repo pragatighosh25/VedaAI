@@ -10,6 +10,10 @@ import {
   Plus,
   ChevronLeft,
   ChevronRight,
+  FileText,
+  Image,
+  AlertCircle,
+  CheckCircle,
 } from "lucide-react";
 import { useCreateFormStore } from "@/store/assignmentStore";
 import { QUESTION_TYPE_OPTIONS } from "@/lib/types";
@@ -21,6 +25,7 @@ export function CreateAssignmentForm() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [dragOver, setDragOver] = useState(false);
+  const [fileProcessing, setFileProcessing] = useState(false);
 
   const {
     step,
@@ -43,10 +48,24 @@ export function CreateAssignmentForm() {
 
   const { totalQuestions, totalMarks } = getTotals();
 
+  const getFileIcon = (file: File) => {
+    if (file.type.startsWith("image/")) {
+      return <Image className="h-4 w-4" />;
+    }
+    return <FileText className="h-4 w-4" />;
+  };
+
+  const formatFileSize = (bytes: number): string => {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  };
+
   const handleFile = useCallback(
     (f: File | null) => {
       if (!f) {
         setFile(null);
+        setError(null);
         return;
       }
       const allowed = [
@@ -64,7 +83,12 @@ export function CreateAssignmentForm() {
         return;
       }
       setFile(f);
+      setFileProcessing(true);
       setError(null);
+      // Simulate processing delay for UX feedback
+      setTimeout(() => {
+        setFileProcessing(false);
+      }, 500);
     },
     [setFile],
   );
@@ -138,6 +162,12 @@ export function CreateAssignmentForm() {
           <p className="text-sm text-gray-500">
             Basic information about your assignment.
           </p>
+          <div className="mt-3 flex items-start gap-2 rounded-lg bg-blue-50 p-3 text-xs text-blue-800 border border-blue-200">
+            <span className="flex-shrink-0">ℹ️</span>
+            <p>
+              Upload a reference document (PDF, image, or text file) to enhance AI-generated questions. Our system will extract and use the content to create relevant, contextual questions.
+            </p>
+          </div>
         </div>
 
         <div
@@ -155,27 +185,66 @@ export function CreateAssignmentForm() {
             dragOver ? "border-veda-orange bg-orange-50/50" : "border-gray-200"
           }`}
         >
-          <CloudUpload className="mb-3 h-10 w-10 text-gray-400" />
-          <p className="text-center text-sm text-gray-600">
-            Choose a file or drag & drop it here
-          </p>
-          <p className="mt-1 text-center text-xs text-gray-400">
-            (JPEG, PNG, PDF, Text — up to 10MB) — Optional
-          </p>
-          {file && (
-            <p className="mt-2 text-sm font-medium text-veda-orange">
-              {file.name}
-            </p>
+          {!file ? (
+            <>
+              <CloudUpload className="mb-3 h-10 w-10 text-gray-400" />
+              <p className="text-center text-sm text-gray-600">
+                Choose a file or drag & drop it here
+              </p>
+              <p className="mt-1 text-center text-xs text-gray-400">
+                (JPEG, PNG, PDF, Text — up to 10MB) — Optional
+              </p>
+              <label className="mt-4 cursor-pointer rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium hover:bg-gray-50">
+                Browse Files
+                <input
+                  type="file"
+                  className="hidden"
+                  accept=".pdf,.txt,.png,.jpg,.jpeg"
+                  onChange={(e) => handleFile(e.target.files?.[0] ?? null)}
+                />
+              </label>
+            </>
+          ) : (
+            <div className="w-full">
+              <div className="flex items-start gap-3">
+                <div className="mt-1 text-veda-accent">
+                  {fileProcessing ? (
+                    <div className="h-5 w-5 animate-spin rounded-full border-2 border-gray-300 border-t-veda-accent" />
+                  ) : (
+                    <CheckCircle className="h-5 w-5" />
+                  )}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2">
+                    {getFileIcon(file)}
+                    <p className="text-sm font-medium text-gray-900 truncate">
+                      {file.name}
+                    </p>
+                  </div>
+                  <p className="mt-1 text-xs text-gray-500">
+                    {formatFileSize(file.size)} •{" "}
+                    {file.type === "application/pdf"
+                      ? "PDF (text will be extracted)"
+                      : file.type.startsWith("image/")
+                        ? "Image (OCR will be applied)"
+                        : "Text file"}
+                    {fileProcessing && " • Processing..."}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setFile(null);
+                    setFileProcessing(false);
+                  }}
+                  className="flex-shrink-0 text-gray-400 hover:text-red-500 transition"
+                  aria-label="Remove file"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
           )}
-          <label className="mt-4 cursor-pointer rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium hover:bg-gray-50">
-            Browse Files
-            <input
-              type="file"
-              className="hidden"
-              accept=".pdf,.txt,.png,.jpg,.jpeg"
-              onChange={(e) => handleFile(e.target.files?.[0] ?? null)}
-            />
-          </label>
         </div>
 
         <div className="mb-6">
@@ -377,9 +446,15 @@ export function CreateAssignmentForm() {
 
         {/* Error */}
         {error && (
-          <p className="mt-4 text-sm text-red-500" role="alert">
-            {error}
-          </p>
+          <div className="mt-4 flex items-start gap-3 rounded-lg bg-red-50 p-4 border border-red-200" role="alert">
+            <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="text-sm font-medium text-red-900">
+                {error.includes("extraction") || error.includes("File") ? "File Processing Error" : "Error"}
+              </p>
+              <p className="text-sm text-red-700 mt-1">{error}</p>
+            </div>
+          </div>
         )}
       </div>
 

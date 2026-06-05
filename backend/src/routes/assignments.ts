@@ -14,6 +14,11 @@ import {
 
 import { authMiddleware } from "../middleware/authMiddleware";
 
+import {
+  extractTextFromFile,
+  formatExtractedText,
+} from "../services/fileExtractionService";
+
 const upload = multer({
   storage: multer.memoryStorage(),
 
@@ -107,16 +112,26 @@ assignmentRouter.post(
         uploadedFileName =
           req.file.originalname;
 
-        if (
-          req.file.mimetype ===
-          "application/pdf"
-        ) {
-          uploadedFileText = `[PDF uploaded: ${req.file.originalname}. Use filename and teacher instructions for context.]`;
-        } else {
+        try {
+          const extraction =
+            await extractTextFromFile(
+              req.file.buffer,
+              req.file.mimetype,
+              req.file.originalname
+            );
           uploadedFileText =
-            req.file.buffer
-              .toString("utf-8")
-              .slice(0, 8000);
+            formatExtractedText(
+              extraction
+            );
+          console.log(
+            `Extracted ${extraction.charCount} chars from ${extraction.fileName} (${extraction.method})`
+          );
+        } catch (extractionError) {
+          console.warn(
+            `File extraction failed, proceeding with fallback: ${extractionError instanceof Error ? extractionError.message : "Unknown error"}`
+          );
+          // Fallback: use filename as context
+          uploadedFileText = `[${req.file.mimetype === "application/pdf" ? "PDF" : "File"} uploaded: ${req.file.originalname}. Use teacher instructions for context.]`;
         }
       }
 
