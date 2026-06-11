@@ -18,6 +18,9 @@ const envSchema = z.object({
     .enum(["true", "false"])
     .optional()
     .transform((v) => v !== "false"),
+  TAVILY_API_KEY: z.string().optional(),
+  YOUTUBE_API_KEY: z.string().optional(),
+  GOOGLE_BOOKS_API_KEY: z.string().optional(),
 });
 
 export const env = envSchema.parse(process.env);

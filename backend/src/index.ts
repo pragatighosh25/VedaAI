@@ -16,6 +16,8 @@ import { subscribe } from "./socket/socketManager";
 import { authRouter } from "./routes/authRoutes";
 import { userRouter } from "./routes/userRoutes";
 import { Assignment } from "./models/Assignment";
+import { resourceRouter } from "./routes/resourceRoutes";
+import { collectionRouter } from "./routes/collectionRoutes";
 
 const app = express();
 
@@ -50,6 +52,8 @@ app.get("/health", async (_req, res) => {
 app.use("/api/assignments", assignmentRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
+app.use("/api/resources", resourceRouter);
+app.use("/api/collections", collectionRouter);
 app.use(errorHandler);
 
 const server = http.createServer(app);

@@ -7,8 +7,7 @@ import { useAuthStore } from "@/store/authStore";
 import {
   LayoutGrid,
   FileText,
-  Library,
-  Sparkles,
+  Bookmark,
 } from "lucide-react";
 
 const navItems = [
@@ -27,13 +26,7 @@ const navItems = [
   {
     href: "/library",
     label: "Library",
-    icon: Library,
-  },
-
-  {
-    href: "/toolkit",
-    label: "AI Toolkit",
-    icon: Sparkles,
+    icon: Bookmark,
   },
 ];
 
@@ -58,8 +51,9 @@ export function MobileNavbar() {
             item.icon;
 
           const active =
-            pathname ===
-            item.href;
+            item.href === "/library"
+              ? pathname.startsWith("/library") || pathname.startsWith("/collections")
+              : pathname === item.href;
 
           return (
             <Link

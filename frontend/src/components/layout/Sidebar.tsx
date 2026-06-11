@@ -16,6 +16,8 @@ import {
   Clock,
   Settings,
   Sparkles,
+  Compass,
+  Bookmark,
 } from "lucide-react";
 
 import { Logo } from "./Logo";
@@ -58,9 +60,9 @@ export function Sidebar() {
       badge: assignments.length,
     },
 
-    { href: "/toolkit", label: "AI Teacher's Toolkit", icon: Tablet },
+    { href: "/resource-discovery", label: "Resource Discovery", icon: Compass },
 
-    { href: "/library", label: "My Library", icon: Clock },
+    { href: "/library", label: "My Library", icon: Bookmark },
   ];
 
   return (
@@ -80,7 +82,9 @@ export function Sidebar() {
           const active =
             item.href === "/assignments"
               ? pathname.startsWith("/assignments")
-              : pathname === item.href;
+              : item.href === "/library"
+                ? pathname.startsWith("/library") || pathname.startsWith("/collections")
+                : pathname === item.href;
 
           const Icon = item.icon;
 

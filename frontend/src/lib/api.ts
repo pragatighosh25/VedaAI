@@ -312,3 +312,95 @@ export function getPdfDownloadUrl(
 ): string {
   return `${API_URL}/api/assignments/${id}/pdf`;
 }
+
+/* -------------------------------------------------------------------------- */
+/*                              RESOURCE DISCOVERY                            */
+/* -------------------------------------------------------------------------- */
+
+export interface Resource {
+  _id?: string;
+  title: string;
+  description: string;
+  url: string;
+  thumbnail: string;
+  publisher: string;
+  type: "video" | "book" | "article" | "paper";
+  createdAt?: string;
+}
+
+export interface ResourceDiscoveryResponse {
+  query: string;
+  subject?: string;
+  resources: Resource[];
+}
+
+export async function fetchResources(query: string, subject?: string, className?: string): Promise<ResourceDiscoveryResponse> {
+  const subjectParam = subject ? `&subject=${encodeURIComponent(subject)}` : "";
+  const classParam = className ? `&className=${encodeURIComponent(className)}` : "";
+  return request<ResourceDiscoveryResponse>(
+    `/api/resources?q=${encodeURIComponent(query)}${subjectParam}${classParam}`
+  );
+}
+
+export async function saveResource(resource: Resource): Promise<Resource> {
+  return request<Resource>("/api/resources/save", {
+    method: "POST",
+    body: JSON.stringify(resource),
+  });
+}
+
+export async function fetchSavedResources(): Promise<Resource[]> {
+  return request<Resource[]>("/api/resources/saved");
+}
+
+export async function deleteSavedResource(id: string): Promise<void> {
+  return request<void>(`/api/resources/saved/${id}`, {
+    method: "DELETE",
+  });
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                COLLECTIONS                                 */
+/* -------------------------------------------------------------------------- */
+
+export interface Collection {
+  _id?: string;
+  name: string;
+  description?: string;
+  resources: Resource[];
+  createdAt?: string;
+}
+
+export async function fetchCollections(): Promise<Collection[]> {
+  return request<Collection[]>("/api/collections");
+}
+
+export async function createCollection(name: string, description?: string): Promise<Collection> {
+  return request<Collection>("/api/collections", {
+    method: "POST",
+    body: JSON.stringify({ name, description }),
+  });
+}
+
+export async function fetchCollectionDetails(id: string): Promise<Collection> {
+  return request<Collection>(`/api/collections/${id}`);
+}
+
+export async function deleteCollection(id: string): Promise<void> {
+  return request<void>(`/api/collections/${id}`, {
+    method: "DELETE",
+  });
+}
+
+export async function addResourceToCollection(collectionId: string, resourceId: string): Promise<Collection> {
+  return request<Collection>(`/api/collections/${collectionId}/resources`, {
+    method: "POST",
+    body: JSON.stringify({ resourceId }),
+  });
+}
+
+export async function removeResourceFromCollection(collectionId: string, resourceId: string): Promise<Collection> {
+  return request<Collection>(`/api/collections/${collectionId}/resources/${resourceId}`, {
+    method: "DELETE",
+  });
+}

@@ -18,6 +18,7 @@ import {
 import { useCreateFormStore } from "@/store/assignmentStore";
 import { QUESTION_TYPE_OPTIONS } from "@/lib/types";
 import { StepperInput } from "@/components/ui/StepperInput";
+import { Dropdown } from "@/components/ui/Dropdown";
 import { createAssignment } from "@/lib/api";
 
 export function CreateAssignmentForm() {
@@ -290,19 +291,17 @@ export function CreateAssignmentForm() {
               {questionTypes.map((row) => (
                 <tr key={row.id} className="border-b border-gray-50">
                   <td className="py-3 pr-2">
-                    <select
+                    <Dropdown
                       value={row.type}
-                      onChange={(e) =>
-                        updateQuestionType(row.id, { type: e.target.value })
+                      onChange={(val) =>
+                        updateQuestionType(row.id, { type: val })
                       }
-                      className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-veda-orange focus:outline-none"
-                    >
-                      {QUESTION_TYPE_OPTIONS.map((opt) => (
-                        <option key={opt} value={opt}>
-                          {opt}
-                        </option>
-                      ))}
-                    </select>
+                      options={QUESTION_TYPE_OPTIONS.map((opt) => ({
+                        value: opt,
+                        label: opt,
+                      }))}
+                      triggerClassName="rounded-lg py-2 text-sm border-gray-200"
+                    />
                   </td>
                   <td className="py-3">
                     <StepperInput
@@ -340,19 +339,18 @@ export function CreateAssignmentForm() {
           {questionTypes.map((row) => (
             <div key={row.id} className="rounded-2xl border border-gray-200 bg-white p-4">
               <div className="mb-3 flex items-center gap-2">
-                <select
+                <Dropdown
                   value={row.type}
-                  onChange={(e) =>
-                    updateQuestionType(row.id, { type: e.target.value })
+                  onChange={(val) =>
+                    updateQuestionType(row.id, { type: val })
                   }
-                  className="h-10 flex-1 rounded-xl border border-gray-200 px-3 text-sm focus:border-veda-orange focus:outline-none"
-                >
-                  {QUESTION_TYPE_OPTIONS.map((opt) => (
-                    <option key={opt} value={opt}>
-                      {opt}
-                    </option>
-                  ))}
-                </select>
+                  options={QUESTION_TYPE_OPTIONS.map((opt) => ({
+                    value: opt,
+                    label: opt,
+                  }))}
+                  triggerClassName="rounded-xl h-10 py-1.5 text-sm border-gray-200"
+                  className="flex-1"
+                />
                 <button
                   type="button"
                   onClick={() => removeQuestionType(row.id)}
