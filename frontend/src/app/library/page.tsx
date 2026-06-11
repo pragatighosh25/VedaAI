@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Dropdown } from "@/components/ui/Dropdown";
+import { SearchBar } from "@/components/ui/SearchBar";
 import { 
   fetchSavedResources, 
   deleteSavedResource, 
@@ -201,17 +202,12 @@ export default function LibraryPage() {
           </p>
         </div>
 
-        {/* Search input */}
-        <div className="flex items-center bg-white rounded-full border border-gray-200 p-1 shadow-sm w-full md:w-72">
-          <Search className="text-gray-400 h-5 w-5 ml-3" />
-          <input
-            className="border-0 focus:ring-0 bg-transparent w-full text-sm py-1.5 px-2 outline-none text-gray-900 placeholder:text-gray-400"
-            placeholder="Search library"
-            type="search"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
+        <SearchBar
+          value={searchQuery}
+          onChange={setSearchQuery}
+          placeholder="Search library"
+          className="w-full md:w-72"
+        />
       </div>
 
       {/* Filter Tabs & Sorting */}

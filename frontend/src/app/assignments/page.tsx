@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { Search, Filter, Plus } from "lucide-react";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
+import { SearchBar } from "@/components/ui/SearchBar";
 import { EmptyState } from "@/components/assignments/EmptyState";
 import { AssignmentCard } from "@/components/assignments/AssignmentCard";
 import { fetchAssignments, deleteAssignment } from "@/lib/api";
@@ -72,16 +73,12 @@ export default function AssignmentsPage() {
               <Filter className="h-4 w-4" />
               Filter By
             </button>
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-              <input
-                type="search"
-                placeholder="Search Assignment"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="w-full rounded-full border border-gray-200 bg-white py-2.5 pl-11 pr-4 text-sm shadow-sm focus:border-veda-orange focus:outline-none sm:w-72"
-              />
-            </div>
+            <SearchBar
+              value={search}
+              onChange={setSearch}
+              placeholder="Search Assignment"
+              className="sm:w-72 w-full"
+            />
           </div>
         )}
       </div>

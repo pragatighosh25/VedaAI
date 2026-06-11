@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Dropdown } from "@/components/ui/Dropdown";
+import { SearchBar } from "@/components/ui/SearchBar";
 import { 
   fetchResources, 
   saveResource, 
@@ -176,17 +177,13 @@ export default function ResourceDiscoveryPage() {
           className="mx-auto flex max-w-4xl flex-col gap-3 sm:flex-row"
         >
           {/* Query Input */}
-          <div className="relative flex-1">
-            <SearchIcon className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              className="w-full rounded-2xl border border-gray-200 bg-white py-3.5 pl-12 pr-4 text-sm text-gray-900 shadow-sm transition-all focus:border-veda-orange focus:outline-none focus:ring-2 focus:ring-veda-orange/15 placeholder:text-gray-400"
-              placeholder="e.g. 'Binary Trees', 'Cellular Respiration'"
-              required
-            />
-          </div>
+          <SearchBar
+            value={query}
+            onChange={setQuery}
+            placeholder="e.g. 'Binary Trees', 'Cellular Respiration'"
+            className="flex-1"
+            inputClassName="rounded-2xl py-3.5 pl-12 text-sm"
+          />
 
           {/* Category Dropdown */}
           <Dropdown

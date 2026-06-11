@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Dropdown } from "@/components/ui/Dropdown";
+import { SearchBar } from "@/components/ui/SearchBar";
 import { 
   fetchCollectionDetails, 
   deleteCollection, 
@@ -208,17 +209,12 @@ export default function CollectionDetailPage() {
 
           {/* Filtering and Search within Collection */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            {/* Search */}
-            <div className="flex items-center bg-white rounded-full border border-gray-200 p-1 shadow-sm w-full sm:w-72">
-              <Search className="text-gray-400 h-4 w-4 ml-3" />
-              <input
-                className="border-0 focus:ring-0 bg-transparent w-full text-xs py-1.5 px-2 outline-none text-gray-900 placeholder:text-gray-400"
-                placeholder="Search inside folder"
-                type="search"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
+            <SearchBar
+              value={searchQuery}
+              onChange={setSearchQuery}
+              placeholder="Search inside folder"
+              className="w-full sm:w-72"
+            />
 
             {/* Sort */}
             <Dropdown
