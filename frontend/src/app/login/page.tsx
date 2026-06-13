@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, ArrowLeft } from "lucide-react";
 
 import { login } from "@/lib/api";
 import { useAuthStore } from "@/store/authStore";
@@ -77,7 +77,15 @@ export default function LoginPage() {
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-veda-gray px-4 py-10">
-      <div className="w-full max-w-[460px] rounded-[32px] bg-white p-8 shadow-sm sm:p-10">
+      <div className="w-full max-w-[460px] rounded-[32px] bg-white p-8 shadow-sm sm:p-10 relative">
+        {/* Back to LP */}
+        <Link 
+          href="/" 
+          className="absolute left-6 top-6 sm:left-8 sm:top-8 flex items-center justify-center w-9 h-9 rounded-full border border-[#E7E7E7] hover:border-[#1F1F1F] text-[#7B7B7B] hover:text-[#1F1F1F] bg-[#FAFAFA] hover:bg-white transition-all group shadow-sm"
+          title="Back to home"
+        >
+          <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" />
+        </Link>
         
         {/* Logo */}
         <div className="flex justify-center">

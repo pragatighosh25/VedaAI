@@ -488,7 +488,7 @@ export default function Home() {
       </div>
 
         {/* Value Prop Statement */}
-        <section className="max-w-4xl mx-auto px-6 text-center mb-32" id="about">
+        <section className="max-w-6xl mx-auto px-6 text-center mb-32" id="about">
           <h2 ref={scrollTextRef} className="text-3xl md:text-5xl font-bold leading-snug tracking-tight">
             {"VedaAI is an intelligent platform designed for modern educators to design curriculum, generate customized assignments, and organize resources to elevate the academic experience without increasing workload.".split(" ").map((word, index, arr) => {
               const wordProgress = index / arr.length;
