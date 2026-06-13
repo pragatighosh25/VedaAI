@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VedaAI - AI Academic Assessment &amp; Intelligence System</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Bricolage Grotesque"', 'sans-serif'],
+          },
+          colors: {
+            veda: {
+              orange: '#FF5722',
+              dark: '#1A1A1A',
+              light: '#F8F9FA',
+              gray: '#6B7280',
+              bg: '#EAF2F6'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-styles">
+    body {
+      background-color: #EAF2F6; /* Light bluish-gray background from screenshot */
+    }
+    
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      overflow: hidden;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #FF5722, #FFA000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="font-sans text-veda-dark antialiased">
+<!-- BEGIN: Header -->
+<header class="fixed top-0 left-0 right-0 z-50 glass-nav">
+<div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+<!-- Logo -->
+<a class="flex items-center gap-2" href="#">
+<img alt="VedaAI Logo" class="h-8 w-8 rounded-lg object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwjzYY-RdgGls98gHOou6EI8HRvtHPiCHRxpccqSdkjrBLc1MphaqMgLb2cKxt7LxWe05tVDujBAFzQiEGDdOXhyeLr0MsccebNiCmj27JNeNjSfMG0GXapWKeAvM3IeAXCIJqX4ap2z0qXLTU5MeCEcD98x0fbMAII_ggxfDjW87krxRobPobWVYWk9_aWKo8AyQLwAEWXwPkkejjeSE2YZBQrvHTk6Sm67zh1lm0RX3Gf8VuFn3-WsbR4-IHni62g4DAAhLZdrjc"/>
+<span class="text-xl font-bold tracking-tight">VedaAI</span>
+</a>
+<!-- Desktop Nav -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium hover:text-veda-orange transition-colors" href="#">Home</a>
+<a class="text-sm font-medium text-veda-gray hover:text-veda-orange transition-colors" href="#solutions">Solutions</a>
+<a class="text-sm font-medium text-veda-gray hover:text-veda-orange transition-colors" href="#teachers">Teachers</a>
+<a class="text-sm font-medium text-veda-gray hover:text-veda-orange transition-colors" href="#about">About Us</a>
+<a class="text-sm font-medium text-veda-gray hover:text-veda-orange transition-colors" href="#careers">Careers</a>
+<a class="text-sm font-medium text-veda-gray hover:text-veda-orange transition-colors" href="#blog">Blogs</a>
+</nav>
+<!-- CTA -->
+<a class="hidden md:inline-flex items-center justify-center px-6 py-2.5 text-sm font-semibold text-white bg-veda-dark rounded-full hover:bg-gray-800 transition-colors" href="#contact">
+        Contact Us
+      </a>
+<!-- Mobile Menu Button (Placeholder) -->
+<button class="md:hidden p-2 text-veda-dark">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+</header>
+<!-- END: Header -->
+<main class="pt-32 pb-24">
+<!-- BEGIN: Hero Section -->
+<section class="max-w-5xl mx-auto px-6 text-center mb-24">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/50 border border-black/5 text-sm font-medium mb-8">
+<span class="text-veda-orange">🔥</span> Incubated at IIM Bangalore
+      </div>
+<h1 class="text-5xl md:text-7xl font-bold tracking-tight leading-tight mb-6">
+        AI Academic Assessment &amp;<br/>
+<span class="gradient-text border-2 border-veda-orange/20 rounded-full px-6 py-1 inline-block mt-2 bg-white/50">Intelligence System</span>
+</h1>
+<p class="text-lg text-veda-gray max-w-2xl mx-auto mb-10">
+        An AI academic system for assessment, teaching, and personalised learning - designed to improve academic outcomes, reduce cost &amp; time, and strengthen institutional credibility.
+      </p>
+<a class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-veda-dark rounded-full hover:bg-gray-800 transition-transform hover:scale-105" href="#book">
+        Book a meeting
+      </a>
+<!-- Dashboard Mockup Image -->
+<div class="mt-20 relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/40 max-w-4xl mx-auto bg-white">
+<img alt="VedaAI Dashboard Performance Summary" class="w-full h-auto object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwUTqhJ6OrUZSuz2JnqfiqWm45Fqk8WcIhBM-jXcsINrvrABRpkyruFklwqNcElnjZ1ulygXA7AuFdEivKH2XCIzRu-1hRGDlAuvaG27w9TBlktzzOAyl3o4mBFHjfaw15RtMda8Knx63pJk6PZaurvi1TBnE6448SdC_qg5hePIhKtSypeSZ7hEf0d6EkS7vQNg2dkDB2EqhXqLlLpjKjjhQy7bwdEjZRfh7exdcbZPJrowg1-fsjNsHZr05uSprT7XYREf49aPU3"/>
+</div>
+</section>
+<!-- END: Hero Section -->
+<!-- BEGIN: Trust Logos -->
+<section class="max-w-5xl mx-auto px-6 mb-32 text-center opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+<p class="text-sm font-semibold uppercase tracking-wider mb-8 text-veda-gray">Trusted and Backed by</p>
+<div class="flex flex-wrap justify-center items-center gap-12 md:gap-24">
+<!-- Missing specific logos, using placeholders -->
+<img alt="AWS" class="h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoFoU9_Iijaqr6n6knj6iG6N6qxYYaZIoWwcYVAO0YZ470PV0ZBTDXITlAm7_7xAx94JTOwn3WJs2Avxhzq6_JHYzfXUr8ZA1i4FysQSl7PMoEgNywTqsyzPB4H-Eria6R3ZxsNq4fmSPHn_Pu83u0Fyu9l1vT0S9Ciit3GWpN538DS1fJwpAfZiHMGJZgULke6ulptkCzHNL_K1snlFrleIbgTjlvY9V9HT3tl-pkQoLKp062k5k-xbJyaDqS3rl4ZkYx3jfKDklK"/>
+<img alt="Microsoft" class="h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSQKdiZiyhVhDC7VtnwYphRpyCyMXz5L6FDRzhQ39iSOlg2l2YJvDPBt76CgaGZo6Xw3lOr-sQ08L2Ef1g7zm2uIjnk0ZNrEI4YPd6YVgBuo6h4CXeGn0kldHGnrrwsHweJ35hMB-Ud8RxWZia0IBzk9b2cgzMOxaXwt_4G_5Hv-C1mPiqB_oU0Xiw-5AxQtg6lT5m1c8pjHBwzLq7BgcQk5xO_e7Gm__Wvu0UV2BTHIfGwPKLH1g2plAjEaOCexvv0qteIKlDTQTN"/>
+<img alt="IIMB" class="h-10 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBkF0XwRWiCdHZg5tBhYSpQyB_dkh3cPToumWTuS512_wadez0jbLvZ9Fg8KIMnKJdz2XlBXWF-REeyw7w4-THAoa00Z2CGVDemBBqdZb6zg75ESvi-LER28_imd74_Ef4wm9h5dU84NoFuzHlxGtEFVIunaUu9A-udsPU4XsCA-Tmhssn85fbzfrqfVvXxn78JzOOtCzubqlZHRmCHrmobCmsWmg-h68stMRkLNdcm9zhNu5qkPX2Wy5RWJGEwOgad4kkIT40oITd"/>
+<img alt="Google" class="h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQZVuBicaamVR4ulrrFwF73pW3UKuDoL0LSUKDJd-YyYUGFggbYvVkZ6PMCgHn3PeQPeS1LUHRSPqKMq4IRoUptcf-FtOa_3PJyfLNJ-aYjX_x30IHcwT_NfxWNxhOB4ceOxuGevwxuCNKiyE1GkSsbYhINNh3zJITdKYZ1GSiZyXi58nHovF1k_Go6CqmmPYxAY81qZqmUsfzp9ibdCA-kEf9dBNSqmT_CX50nZeQTY0Wto0CNSCq2ZGheb5NbathE04dYNx8QIyl"/>
+</div>
+</section>
+<!-- END: Trust Logos -->
+<!-- BEGIN: Main Value Prop -->
+<section class="max-w-4xl mx-auto px-6 text-center mb-32">
+<h2 class="text-3xl md:text-5xl font-bold leading-tight">
+        VedaAI is an AI Academic Assessment system that enables educational institutions to deliver stronger academic results, increase parent confidence, and build long-term institutional reputation.
+      </h2>
+</section>
+<!-- END: Main Value Prop -->
+<!-- BEGIN: Mobile App Preview -->
+<section class="max-w-6xl mx-auto px-6 relative mb-32 flex justify-center">
+<div class="relative w-full max-w-md">
+<!-- Abstract stats floating around -->
+<div class="absolute top-20 -left-32 bg-white rounded-2xl p-4 shadow-xl text-center rotate-[-5deg]">
+<div class="text-2xl font-bold text-veda-orange">32+</div>
+<div class="text-xs text-gray-500">Hours saved per teacher</div>
+</div>
+<div class="absolute bottom-40 -right-32 bg-white rounded-2xl p-4 shadow-xl text-center rotate-[5deg]">
+<div class="text-2xl font-bold text-veda-orange">94%</div>
+<div class="text-xs text-gray-500">Faster assignment evaluation</div>
+</div>
+<img alt="VedaAI Mobile App Classroom View" class="w-[300px] mx-auto rounded-[3rem] shadow-2xl border-8 border-gray-900" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJgyl58089u2SIS7BAGlg_s8LmoidyRfJH-fpUzcHpnlHf0PioVzLqxDydA-xqpmQzf2hRR4mtl15SVdOlM5Hh7g1gWPpBbgVwNG1Tr8qXo8nPH7RVqaQd_fYb5zUIkAaV2klC9q_u-FLhGN5EGKjzqKj8ofVDuhfGckMQXWeiELxT6K-G1VOI4RyI4CsM9OCNG_ruC8Byv5iwPwQFoIbmWNSM0RU0vVAi_wLJf461D60BFL6eZ1EZZAoIXDaRAQq4a92pQJYjeKFC"/>
+</div>
+</section>
+<!-- END: Mobile App Preview -->
+<div class="text-center max-w-3xl mx-auto px-6 mb-32 text-veda-gray">
+       "By improving learning outcomes and academic results through empowered teachers and personalised student support, VedaAI enables educational institutions to operate more efficiently at scale while building a strong, long-lasting reputation."
+    </div>
+<!-- BEGIN: Testimonial -->
+<section class="max-w-4xl mx-auto px-6 mb-32">
+<div class="bg-white rounded-3xl p-10 md:p-16 text-center shadow-lg relative">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-6xl text-veda-orange opacity-20">"</div>
+<p class="text-xl md:text-2xl font-semibold italic mb-10 leading-relaxed text-gray-800 relative z-10">
+          "<span class="text-veda-orange font-bold">VedaAI</span> reduced the time required for homework, assignments, and exam evaluation while maintaining consistent quality across sections. We saw faster result cycles and clearer academic insights within the first term, with visible ROI and no increase in staff or operational costs."
+        </p>
+<div class="flex flex-col items-center">
+<img alt="Dr. A. Sharma" class="w-16 h-16 rounded-full object-cover mb-4 border-2 border-veda-bg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_ynXFmbzgKMZJI5Ywwm3AqAYW1kKKV0Pv6LOVyGqdLQ7XH0u-QJCcFJehq5KUkJ5_wJtKqKdM_b_h9XItlqtqPTyL8GunqcQXJCoWcOKEDzQmEP-S6Qnr6Iu-hm7fQ2KMqnPXtp_ziGHi50FnEGBimEc2iseH1eTZ8FgdimtJmVUkKx2Qi6NaAU6s0zXOXmb1QWMdHZJek1iH83p_8I1dHQ_jA5Omw2kQYvn9Qb6k_KqoW63Nf7N0BlJi9FFSihQZXy2oB5Y2CnZa"/>
+<h4 class="font-bold">Dr. A. Sharma</h4>
+<p class="text-sm text-gray-500">Principal, Horizon International School, Delhi</p>
+</div>
+</div>
+</section>
+<!-- END: Testimonial -->
+<!-- BEGIN: Features Grid -->
+<section class="max-w-5xl mx-auto px-6 mb-32">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-bold mb-4">What VedaAI Enables</h2>
+<p class="text-gray-600 max-w-2xl mx-auto">VedaAI automates grading, delivers structured feedback, and provides deep learning analytics helping institutions scale quality education effortlessly.</p>
+</div>
+<div class="grid md:grid-cols-2 gap-6">
+<!-- Feature 1 -->
+<div class="feature-card p-6 flex flex-col bg-white">
+<img alt="Turn Data into Actionable Insights" class="w-full h-48 object-cover rounded-xl mb-6 bg-gray-50 border border-gray-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0afgpD2Q5Be0LG43dOxx4P69RAe_KYggmBGxOHd5XSCWTPpcmOQQHxHGM7M4seKKfc7nUvzBXIQ3HgYSNZlIKPtEJe-QxkaKQg4Et7QI7dsNSqitXqsbWZABDgce0XtuK50WXoJhSNPJpixhxBBFwzFmn8YfKSSk6BUWWQ9U2YmmbNJj9varxy4K9gQ1lfdIlLzlbRxdaiXLQVlp7-VuzIhfDuTdtaPyzFL2rkg1f0o4hSYRXPnYMnD6p3IPJpEzgvjNLZpaYYSIQ"/>
+<h3 class="text-xl font-bold mb-2">Turn Data into Actionable Insights</h3>
+<p class="text-gray-500 text-sm">Visualize class trends, identify learning gaps, and make data-backed academic decisions.</p>
+</div>
+<!-- Feature 2 -->
+<div class="feature-card p-6 flex flex-col bg-white">
+<!-- Using placeholder as specific student list image isn't perfectly isolated in snapshot -->
+<div class="w-full h-48 rounded-xl mb-6 bg-gray-50 border border-gray-100 flex items-center justify-center p-4">
+<img alt="Access Student Performance" class="w-full h-full object-contain mix-blend-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_d70PVUcF4a-1HAP-hz4UnYn9kdvwId3My7NW-Jxiwebxanbut5jjLwTxR4TM0SA1_d9DRiBxhaI1qhCsM-3arj8VnXcOlOTnD8j5eDUsMcgANkEGFJOcLHLVQaWPyO0W3itLcSapKFd8W549JwwYEvYtGGl4YO0W6K1RjAcYHYNZx3ArbjOOW2Po_gSNiOmWq12brdREcB6e8J7RmUrOoy1P4HHv5AXGeZ5OsQhcCVBLCdhjM6L91-f1sGuQNEZTOzfi3hMYaTCJ"/>
+</div>
+<h3 class="text-xl font-bold mb-2">Access Student Performance Instantly</h3>
+<p class="text-gray-500 text-sm">Search any student and instantly view grades, feedback, and performance indicators.</p>
+</div>
+<!-- Feature 3 -->
+<div class="feature-card p-6 flex flex-col bg-white">
+<div class="w-full h-48 rounded-xl mb-6 bg-[#F4F1ED] flex items-center justify-center overflow-hidden">
+<!-- Abstract grading visualization -->
+<img alt="AI Grading Scan" class="h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnCaUFFUmd3NezGEM0RGuxkESGysRZRYOcXm1Hu4ajjon6TkFfXtO0tD0t3Hz8R-4g3kXoJ6Qt_vmmEFxH9w03_egNFCfZM4_f-sD-emhg9YYk-14W95NFuEJn93OplcwKAxujoEq4RinL2-A1JnUmq38YxrIiKjqf6XhXXRUQNPWL9hvKEgilqTCAJIr6VzAqn7jOy5SqRePfLTPMVdeLuv5A5MPJFRLTjgUK4TB0EDOYtX3ao8eIox56nqH2g1T6yGAmRSjwuuXE"/>
+</div>
+<h3 class="text-xl font-bold mb-2">AI-powered grading in seconds</h3>
+<p class="text-gray-500 text-sm">Evaluate subjective and objective answers accurately using customizable rubric-based AI.</p>
+</div>
+<!-- Feature 4 (Repeated visual from earlier for symmetry based on vague screenshot structure) -->
+<div class="feature-card p-6 flex flex-col bg-white">
+<img alt="Actionable Insights Chart" class="w-full h-48 object-cover object-top rounded-xl mb-6 bg-gray-50 border border-gray-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHmvuWPgHJvf-cM5NNryRVbEYycXPcN-dj3rOkKC1gPiuQwMCannRKGP79b07g8pgNhDNzMyJ3h2JmTZGuadcjWzOO8d3At0pDgQTHTdxhs2dsJpjm6fU8dILMkQfnCgV1isH8EXddaSVLZSamTGTHZ-l62ymmBUg-dmzoifQgUUnCHm4vMdowME8vswSTOpT8qssj_5uToh3xHHSlpcgP5-8GH-jrtkyLyX732IVhbB2SkdEeKF0nCBLwC1089SNsRwyduafMLhRE"/>
+<h3 class="text-xl font-bold mb-2">Turn Data into Actionable Insights</h3>
+<p class="text-gray-500 text-sm">Visualize class trends, identify learning gaps, and make data-backed academic decisions.</p>
+</div>
+</div>
+</section>
+<!-- END: Features Grid -->
+<!-- BEGIN: Deep Dive Dashboard -->
+<section class="max-w-6xl mx-auto px-6 mb-32">
+<div class="text-center mb-12">
+<h2 class="text-4xl font-bold mb-4">AI Assignment &amp; Assessment Grader</h2>
+<p class="text-gray-600 max-w-2xl mx-auto">A clear, intuitive dashboard reveals performance trends, learning gaps, and data-driven recommendations for every class.</p>
+</div>
+<div class="bg-white rounded-3xl p-4 shadow-xl border border-gray-100 mb-12">
+<img alt="Full Assessment Dashboard" class="w-full h-auto rounded-2xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtooxP_sYpF93fW7YzHMZt41UHZdKCPPkHh3bNpEnxJR_NPMIOxHp0F4-mnPDW59L60UQ402-m0XAxKA3MDfTAYGvp5SgJ9L14YCCbLTSWBsie3ijN48c3NaJUBI1NyD0-s-pCbEg6nMceLPUWVK8VGhtcVF9COCD8QTBYJUokST6MkUTQO3lufVrc8UqcIWz3q7m07hhKLFZCmdySUdIOKW8kwAC3aJevuU0B3FRHAHSBQdRqK9g_6sBBTaW1nyLuqr3hNAuvnbhu"/>
+</div>
+<div class="max-w-3xl mx-auto bg-white rounded-3xl p-8 shadow-sm">
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="text-veda-orange mt-1">●</span>
+<span class="text-gray-700 font-medium">Automatically evaluates subjective &amp; objective answers</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="text-veda-orange mt-1">●</span>
+<span class="text-gray-700 font-medium">Uses rubric-based AI grading (fully customisable to your school)</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="text-veda-orange mt-1">●</span>
+<span class="text-gray-700 font-medium">Provides instant, structured feedback for every student</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="text-veda-orange mt-1">●</span>
+<span class="text-gray-700 font-medium">Allows teacher review &amp; override before final submission</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="text-veda-orange mt-1">●</span>
+<span class="text-gray-700 font-medium">Generates class-wise &amp; student-wise analytics</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="text-veda-orange mt-1">●</span>
+<span class="text-gray-700 font-medium">Identifies learning gaps with recommended actions</span>
+</li>
+</ul>
+</div>
+</section>
+<!-- END: Deep Dive Dashboard -->
+</main>
+<!-- Missing sections: Why VedaAI Stands Out, Security, Footer for brevity in this minimal effort pass, focusing on core visuals provided -->
+<footer class="bg-white py-12 border-t border-gray-200 text-center">
+<p class="text-gray-500">© 2024 Vedafy Technologies Pvt. Ltd. All rights reserved.</p>
+</footer>
+</body></html>
