@@ -8,6 +8,7 @@ import {
   LayoutGrid,
   FileText,
   Bookmark,
+  Compass,
 } from "lucide-react";
 
 const navItems = [
@@ -21,6 +22,12 @@ const navItems = [
     href: "/assignments",
     label: "Assignments",
     icon: FileText,
+  },
+
+  {
+    href: "/resource-discovery",
+    label: "Discovery",
+    icon: Compass,
   },
 
   {
@@ -53,7 +60,9 @@ export function MobileNavbar() {
           const active =
             item.href === "/library"
               ? pathname.startsWith("/library") || pathname.startsWith("/collections")
-              : pathname === item.href;
+              : item.href === "/resource-discovery"
+                ? pathname.startsWith("/resource-discovery")
+                : pathname === item.href;
 
           return (
             <Link
