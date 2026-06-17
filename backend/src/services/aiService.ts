@@ -106,17 +106,3 @@ export async function generateQuestionPaper(
   const retryParsed = JSON.parse(retryContent);
   return parseQuestionPaper(retryParsed);
 }
-
-export function generateAnswerKey(paper: QuestionPaper): string[] {
-  const answers: string[] = [];
-  let index = 1;
-  for (const section of paper.sections) {
-    for (const q of section.questions) {
-      answers.push(
-        `${index}. [${q.difficulty}] Sample answer for: ${q.text.slice(0, 80)}${q.text.length > 80 ? "…" : ""} (${q.marks} marks)`
-      );
-      index++;
-    }
-  }
-  return answers;
-}

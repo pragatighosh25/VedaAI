@@ -14,7 +14,6 @@ import { Assignment } from "../models/Assignment";
 import { User } from "../models/User";
 import {
   generateQuestionPaper,
-  generateAnswerKey,
 } from "../services/aiService";
 import { broadcast } from "../socket/socketManager";
 
@@ -93,11 +92,8 @@ async function processJob(
     "processing"
   );
 
-  const answerKey =
-    generateAnswerKey(paper);
-
   assignment.questionPaper = paper;
-  assignment.answerKey = answerKey;
+  assignment.answerKey = [];
   assignment.status = "completed";
   assignment.progress = 100;
   await assignment.save();
