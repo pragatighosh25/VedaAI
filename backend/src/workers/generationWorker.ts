@@ -159,19 +159,28 @@ export async function startGenerationWorker() {
           err instanceof Error
             ? err.message
             : "Generation failed";
-        await Assignment.findByIdAndUpdate(
-          assignmentId,
-          {
-            status: "failed",
-            errorMessage: message,
-            progress: 0,
-          }
-        );
-        broadcast(assignmentId, {
-          type: "job:failed",
-          assignmentId,
-          error: message,
-        });
+        const maxAttempts = job.opts?.attempts || 3;
+        const currentAttempt = job.attemptsMade + 1; // attemptsMade increments after failure
+
+        if (currentAttempt >= maxAttempts) {
+          await Assignment.findByIdAndUpdate(
+            assignmentId,
+            {
+              status: "failed",
+              errorMessage: message,
+              progress: 0,
+            }
+          );
+          broadcast(assignmentId, {
+            type: "job:failed",
+            assignmentId,
+            error: message,
+          });
+        } else {
+          console.warn(
+            `[GenerationWorker] Attempt ${currentAttempt}/${maxAttempts} failed for assignment ${assignmentId}: ${message}. Retrying with exponential backoff...`
+          );
+        }
         throw err;
       }
     },
