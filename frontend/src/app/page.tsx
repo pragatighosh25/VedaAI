@@ -24,9 +24,7 @@ export default function Home() {
   }, [isHovered]);
 
   useEffect(() => {
-    if (!hydrated) return;
-
-    if (token) {
+    if (hydrated && token) {
       router.replace("/assignments");
     }
   }, [token, hydrated, router]);
@@ -78,23 +76,6 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  if (!hydrated) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-[#EAF2F6]">
-        <div className="flex flex-col items-center gap-3">
-          <Image
-            src="/logo.png"
-            alt="VedaAI Logo"
-            width={48}
-            height={48}
-            className="animate-pulse"
-          />
-          <p className="text-sm font-medium text-veda-dark/60">Loading VedaAI...</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-[#EAF2F6] font-sans text-veda-dark antialiased selection:bg-veda-orange/20 selection:text-veda-orange relative">
       {/* Header */}
@@ -108,6 +89,7 @@ export default function Home() {
               src="/logo.png"
               width={32}
               height={32}
+              priority
             />
             <span className="text-xl font-bold tracking-tight text-veda-dark group-hover:text-veda-orange transition-colors">
               VedaAI
@@ -410,7 +392,7 @@ export default function Home() {
                               <span className="text-[9px] font-semibold">Home</span>
                               <div className="w-4.5 h-4.5 rounded-full bg-veda-orange/10 border border-black/5 relative overflow-hidden">
                                 <Image
-                                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&auto=format&fit=crop&q=80"
+                                  src="/avatar.svg"
                                   alt="User"
                                   fill
                                   className="object-cover"
@@ -532,6 +514,8 @@ export default function Home() {
               src="/screenshot_create.png"
               width={1600}
               height={1000}
+              loading="lazy"
+              sizes="(max-width: 1024px) 100vw, 1000px"
             />
           </div>
         </section>
@@ -567,6 +551,8 @@ export default function Home() {
               src="/screenshot_library.png"
               width={1000}
               height={600}
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, 500px"
             />
           </div>
         </section>
@@ -590,6 +576,8 @@ export default function Home() {
                     src="/screenshot_assignments.png"
                     width={800}
                     height={500}
+                    loading="lazy"
+                    sizes="(max-width: 768px) 100vw, 400px"
                     className="object-cover object-top w-full h-full transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
@@ -803,6 +791,8 @@ export default function Home() {
               src="/screenshot_discovery.png"
               width={1600}
               height={900}
+              loading="lazy"
+              sizes="(max-width: 1024px) 100vw, 1000px"
             />
           </div>
 
