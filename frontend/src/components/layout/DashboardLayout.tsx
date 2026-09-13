@@ -18,6 +18,7 @@ import { MobileNavbar } from "./MobileNavbar";
 import { MobileHeader } from "./MobileHeader";
 
 import { useAuthStore } from "@/store/authStore";
+import { useSessionTimeout } from "@/hooks/useSessionTimeout";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -35,6 +36,8 @@ export function DashboardLayout({
   showBack,
   backHref,
 }: DashboardLayoutProps) {
+  useSessionTimeout();
+
   const [mobileOpen, setMobileOpen] =
     useState(false);
 

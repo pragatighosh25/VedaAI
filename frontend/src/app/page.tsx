@@ -37,7 +37,7 @@ export default function Home() {
           if (scrollTextRef.current) {
             const rect = scrollTextRef.current.getBoundingClientRect();
             const windowHeight = window.innerHeight;
-            
+
             // If element is completely off-screen, progress is 0
             if (rect.bottom < 0 || rect.top > windowHeight) {
               setScrollProgress(0);
@@ -126,348 +126,345 @@ export default function Home() {
         {/* Hero Section Wrapper with full-width gradient */}
         <div className="w-full bg-gradient-to-b from-white to-[#EAF2F6] pt-36 pb-20 mb-20">
           <section className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            {/* Left side: Texts */}
-            <div className="lg:col-span-6 text-left flex flex-col items-start animate-fade-in-up">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 border border-black/5 text-sm font-semibold mb-8 shadow-sm">
-                <span className="text-veda-orange">✨</span> Curriculum Companion
+            <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+              {/* Left side: Texts */}
+              <div className="lg:col-span-6 text-left flex flex-col items-start animate-fade-in-up">
+
+                <h1 className="text-5xl md:text-6xl font-bold tracking-tight leading-[1.1] mb-6 text-[#1F1F1F]">
+                  Next-Generation AI{" "}
+                  <span className="text-veda-orange block mt-2">
+                    Companion for Educator
+                  </span>
+                </h1>
+
+                <p className="text-base md:text-lg text-veda-dark/70 mb-10 leading-relaxed max-w-xl">
+                  An intelligent classroom co-pilot that simplifies lesson prep, question generation, and resource management—empowering teachers to save hours every single week.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto">
+                  <Link
+                    className="inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 text-base font-semibold text-white bg-[#1F1F1F] rounded-full hover:bg-black transition-all hover:scale-[1.03] group shadow-md"
+                    href="/login"
+                  >
+                    Get Started
+                    <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </div>
               </div>
 
-              <h1 className="text-5xl md:text-6xl font-bold tracking-tight leading-[1.1] mb-6 text-[#1F1F1F]">
-                Next-Generation AI{" "}
-                <span className="text-veda-orange block mt-2">
-                  Companion for Educators
-                </span>
-              </h1>
-
-              <p className="text-base md:text-lg text-veda-dark/70 mb-10 leading-relaxed max-w-xl">
-                An intelligent classroom co-pilot that simplifies lesson prep, question generation, and resource management—empowering teachers to save hours every single week.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto">
-                <Link
-                  className="inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 text-base font-semibold text-white bg-[#1F1F1F] rounded-full hover:bg-black transition-all hover:scale-[1.03] group shadow-md"
-                  href="/login"
+              {/* Right side: Interactive Stacked Screenshots Deck */}
+              <div className="lg:col-span-6 relative flex justify-center items-center h-[420px] md:h-[480px] animate-fade-in-right">
+                {/* Interactive Hover Card Deck */}
+                <div
+                  className="relative w-full max-w-[440px] h-[300px] md:h-[340px]"
+                  onMouseEnter={() => setIsHovered(true)}
+                  onMouseLeave={() => setIsHovered(false)}
                 >
-                  Get Started
-                  <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </div>
-            </div>
+                  {[0, 1, 2, 3].map((index) => {
+                    const pos = (3 - index - activeCard + 8) % 4;
+                    let cardClass = "";
+                    if (pos === 0) {
+                      cardClass = "z-40 scale-100 translate-y-0 opacity-100 rotate-0 shadow-2xl";
+                    } else if (pos === 1) {
+                      cardClass = "z-30 scale-95 translate-y-4 opacity-90 rotate-[2deg] shadow-xl";
+                    } else if (pos === 2) {
+                      cardClass = "z-20 scale-90 translate-y-8 opacity-80 rotate-[-2deg] shadow-lg";
+                    } else {
+                      cardClass = "z-10 scale-85 translate-y-12 opacity-0 translate-x-32 rotate-[6deg] pointer-events-none";
+                    }
 
-            {/* Right side: Interactive Stacked Screenshots Deck */}
-            <div className="lg:col-span-6 relative flex justify-center items-center h-[420px] md:h-[480px] animate-fade-in-right">
-              {/* Interactive Hover Card Deck */}
-              <div 
-                className="relative w-full max-w-[440px] h-[300px] md:h-[340px]"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-              >
-                {[0, 1, 2, 3].map((index) => {
-                  const pos = (3 - index - activeCard + 8) % 4;
-                  let cardClass = "";
-                  if (pos === 0) {
-                    cardClass = "z-40 scale-100 translate-y-0 opacity-100 rotate-0 shadow-2xl";
-                  } else if (pos === 1) {
-                    cardClass = "z-30 scale-95 translate-y-4 opacity-90 rotate-[2deg] shadow-xl";
-                  } else if (pos === 2) {
-                    cardClass = "z-20 scale-90 translate-y-8 opacity-80 rotate-[-2deg] shadow-lg";
-                  } else {
-                    cardClass = "z-10 scale-85 translate-y-12 opacity-0 translate-x-32 rotate-[6deg] pointer-events-none";
-                  }
+                    return (
+                      <div
+                        key={index}
+                        onClick={() => setActiveCard((prev) => (prev + 1) % 4)}
+                        className={`absolute inset-0 bg-white rounded-2xl border border-black/5 overflow-hidden transition-all duration-700 ease-in-out cursor-pointer p-5 flex flex-col justify-between text-xs ${cardClass}`}
+                      >
+                        {pos === 0 && (
+                          <div className="absolute inset-0 bg-gradient-to-b from-black/0 to-black/5 pointer-events-none z-10" />
+                        )}
 
-                  return (
-                    <div
-                      key={index}
-                      onClick={() => setActiveCard((prev) => (prev + 1) % 4)}
-                      className={`absolute inset-0 bg-white rounded-2xl border border-black/5 overflow-hidden transition-all duration-700 ease-in-out cursor-pointer p-5 flex flex-col justify-between text-xs ${cardClass}`}
-                    >
-                      {pos === 0 && (
-                        <div className="absolute inset-0 bg-gradient-to-b from-black/0 to-black/5 pointer-events-none z-10" />
-                      )}
-
-                      {/* Card contents depending on index */}
-                      {index === 0 && (
-                        /* Card 0: Personal Library Mockup */
-                        <div className="flex flex-col h-full justify-between">
-                          <div className="flex items-center justify-between border-b border-black/5 pb-2">
-                            <div className="flex items-center gap-1.5 font-bold text-veda-dark">
-                              <FolderHeart className="w-4 h-4 text-veda-orange" />
-                              <span>My Personal Library</span>
+                        {/* Card contents depending on index */}
+                        {index === 0 && (
+                          /* Card 0: Personal Library Mockup */
+                          <div className="flex flex-col h-full justify-between">
+                            <div className="flex items-center justify-between border-b border-black/5 pb-2">
+                              <div className="flex items-center gap-1.5 font-bold text-veda-dark">
+                                <FolderHeart className="w-4 h-4 text-veda-orange" />
+                                <span>My Personal Library</span>
+                              </div>
+                              <span className="text-[9px] font-bold text-veda-dark/40">3 Collections</span>
                             </div>
-                            <span className="text-[9px] font-bold text-veda-dark/40">3 Collections</span>
+
+                            <div className="grid grid-cols-3 gap-2.5 my-2 text-left">
+                              <div className="bg-[#1F1F1F] text-white rounded-xl p-2 border border-black/10 flex flex-col gap-2 relative shadow-md">
+                                <div className="absolute inset-0 bg-veda-orange/10 opacity-30 blur-sm rounded-xl" />
+                                <FolderHeart className="w-3.5 h-3.5 text-veda-orange relative z-10" />
+                                <div className="relative z-10">
+                                  <div className="text-[9px] font-bold truncate">Physics</div>
+                                  <div className="text-[7px] text-white/55 font-medium">12 items</div>
+                                </div>
+                              </div>
+
+                              <div className="bg-[#1F1F1F] text-white rounded-xl p-2 border border-black/10 flex flex-col gap-2 relative shadow-md">
+                                <div className="absolute inset-0 bg-veda-orange/10 opacity-30 blur-sm rounded-xl" />
+                                <FolderHeart className="w-3.5 h-3.5 text-veda-orange relative z-10" />
+                                <div className="relative z-10">
+                                  <div className="text-[9px] font-bold truncate">Chemistry</div>
+                                  <div className="text-[7px] text-white/55 font-medium">8 items</div>
+                                </div>
+                              </div>
+
+                              <div className="bg-[#1F1F1F] text-white rounded-xl p-2 border border-black/10 flex flex-col gap-2 relative shadow-md">
+                                <div className="absolute inset-0 bg-veda-orange/10 opacity-30 blur-sm rounded-xl" />
+                                <FolderHeart className="w-3.5 h-3.5 text-veda-orange relative z-10" />
+                                <div className="relative z-10">
+                                  <div className="text-[9px] font-bold truncate">Biology</div>
+                                  <div className="text-[7px] text-white/55 font-medium">15 items</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="flex flex-col gap-2 my-1.5 text-[10px] text-left">
+                              <div className="flex items-center justify-between bg-[#F5F5F7] p-2 rounded-lg border border-black/5">
+                                <div className="flex items-center gap-2">
+                                  <Bookmark className="w-3.5 h-3.5 text-veda-orange shrink-0" />
+                                  <span className="font-bold text-veda-dark truncate max-w-[180px]">Limits & Derivatives Cheat Sheet</span>
+                                </div>
+                                <span className="text-[8px] text-veda-dark/40 font-semibold shrink-0">Maths</span>
+                              </div>
+
+                              <div className="flex items-center justify-between bg-[#F5F5F7] p-2 rounded-lg border border-black/5">
+                                <div className="flex items-center gap-2">
+                                  <Bookmark className="w-3.5 h-3.5 text-veda-orange shrink-0" />
+                                  <span className="font-bold text-veda-dark truncate max-w-[180px]">Alkanes & Alkynes Reaction Map</span>
+                                </div>
+                                <span className="text-[8px] text-veda-dark/40 font-semibold shrink-0">Chemistry</span>
+                              </div>
+                            </div>
+
+                            <div className="flex items-center gap-2 bg-[#F5F5F7] rounded-lg p-2 border border-black/5 text-[9px] font-semibold text-veda-dark/60">
+                              <GraduationCap className="w-3.5 h-3.5 text-veda-orange shrink-0" />
+                              <span>Easily organize curriculum by subjects and topics</span>
+                            </div>
                           </div>
+                        )}
 
-                          <div className="grid grid-cols-3 gap-2.5 my-2 text-left">
-                            <div className="bg-[#1F1F1F] text-white rounded-xl p-2 border border-black/10 flex flex-col gap-2 relative shadow-md">
-                              <div className="absolute inset-0 bg-veda-orange/10 opacity-30 blur-sm rounded-xl" />
-                              <FolderHeart className="w-3.5 h-3.5 text-veda-orange relative z-10" />
-                              <div className="relative z-10">
-                                <div className="text-[9px] font-bold truncate">Physics</div>
-                                <div className="text-[7px] text-white/55 font-medium">12 items</div>
+                        {index === 1 && (
+                          /* Card 1: Discovery Hub Mockup */
+                          <div className="flex flex-col h-full justify-between">
+                            <div className="flex items-center justify-between border-b border-black/5 pb-2">
+                              <div className="flex items-center gap-1.5 font-bold text-veda-dark">
+                                <Search className="w-4 h-4 text-veda-orange" />
+                                <span>Resource Discovery</span>
+                              </div>
+                              <span className="text-[9px] font-bold text-veda-dark/40">External Search</span>
+                            </div>
+
+                            <div className="bg-[#F5F5F7] rounded-xl px-3 py-2 flex items-center justify-between text-[11px] border border-black/5 my-1.5">
+                              <div className="flex items-center text-veda-dark font-bold">
+                                <span>Quantum Mechanics</span>
+                                <span className="w-[1.5px] h-3.5 bg-veda-orange ml-0.5"></span>
+                              </div>
+                              <Search className="w-3.5 h-3.5 text-veda-dark/40" />
+                            </div>
+
+                            <div className="flex gap-1.5 my-1 overflow-x-auto pb-1 text-[8px]">
+                              <span className="px-2.5 py-1 rounded-full font-bold bg-veda-orange text-white shadow-sm shrink-0">Physics</span>
+                              <span className="px-2.5 py-1 rounded-full font-bold bg-[#F5F5F7] text-veda-dark/50 border border-black/5 shrink-0">Chemistry</span>
+                              <span className="px-2.5 py-1 rounded-full font-bold bg-[#F5F5F7] text-veda-dark/50 border border-black/5 shrink-0">Biology</span>
+                            </div>
+
+                            <div className="flex flex-col gap-2.5 my-1 text-left">
+                              <div className="bg-[#F5F5F7]/80 rounded-xl p-2.5 border border-black/5 flex justify-between items-center gap-2">
+                                <div className="flex items-center gap-2">
+                                  <div className="w-7 h-7 rounded-lg bg-veda-dark text-veda-orange shadow-glow border border-veda-orange/10 flex items-center justify-center shrink-0">
+                                    <BookOpen className="w-4 h-4" />
+                                  </div>
+                                  <div>
+                                    <div className="font-bold text-veda-dark text-[10px] truncate max-w-[130px]">Intro to Quantum Physics</div>
+                                    <div className="text-[8px] text-veda-dark/40 font-semibold flex items-center gap-1.5">
+                                      <span>Video</span>
+                                      <span>&bull;</span>
+                                      <span>Class 11</span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <span className="px-1.5 py-0.5 rounded bg-amber-50 text-amber-700 text-[8px] font-extrabold shrink-0 border border-amber-200">
+                                  ★ 4.8
+                                </span>
+                              </div>
+
+                              <div className="bg-[#F5F5F7]/80 rounded-xl p-2.5 border border-black/5 flex justify-between items-center gap-2">
+                                <div className="flex items-center gap-2">
+                                  <div className="w-7 h-7 rounded-lg bg-veda-dark text-veda-orange shadow-glow border border-veda-orange/10 flex items-center justify-center shrink-0">
+                                    <GraduationCap className="w-4 h-4" />
+                                  </div>
+                                  <div>
+                                    <div className="font-bold text-veda-dark text-[10px] truncate max-w-[130px]">Thermodynamics Guide</div>
+                                    <div className="text-[8px] text-veda-dark/40 font-semibold flex items-center gap-1.5">
+                                      <span>PDF Ebook</span>
+                                      <span>&bull;</span>
+                                      <span>Class 12</span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <span className="px-1.5 py-0.5 rounded bg-amber-50 text-amber-700 text-[8px] font-extrabold shrink-0 border border-amber-200">
+                                  ★ 4.9
+                                </span>
                               </div>
                             </div>
 
-                            <div className="bg-[#1F1F1F] text-white rounded-xl p-2 border border-black/10 flex flex-col gap-2 relative shadow-md">
-                              <div className="absolute inset-0 bg-veda-orange/10 opacity-30 blur-sm rounded-xl" />
-                              <FolderHeart className="w-3.5 h-3.5 text-veda-orange relative z-10" />
-                              <div className="relative z-10">
-                                <div className="text-[9px] font-bold truncate">Chemistry</div>
-                                <div className="text-[7px] text-white/55 font-medium">8 items</div>
-                              </div>
-                            </div>
-
-                            <div className="bg-[#1F1F1F] text-white rounded-xl p-2 border border-black/10 flex flex-col gap-2 relative shadow-md">
-                              <div className="absolute inset-0 bg-veda-orange/10 opacity-30 blur-sm rounded-xl" />
-                              <FolderHeart className="w-3.5 h-3.5 text-veda-orange relative z-10" />
-                              <div className="relative z-10">
-                                <div className="text-[9px] font-bold truncate">Biology</div>
-                                <div className="text-[7px] text-white/55 font-medium">15 items</div>
-                              </div>
+                            <div className="flex items-center gap-1.5 text-[8px] font-bold text-veda-dark/45 mt-1">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-veda-orange shrink-0" />
+                              <span>Save directly to your folders</span>
                             </div>
                           </div>
+                        )}
 
-                          <div className="flex flex-col gap-2 my-1.5 text-[10px] text-left">
-                            <div className="flex items-center justify-between bg-[#F5F5F7] p-2 rounded-lg border border-black/5">
+                        {index === 2 && (
+                          /* Card 2: Question Creator Mockup */
+                          <div className="flex flex-col h-full justify-between">
+                            <div className="flex items-center justify-between border-b border-black/5 pb-2">
+                              <div className="flex items-center gap-1.5 font-bold text-veda-dark">
+                                <Sparkles className="w-4 h-4 text-veda-orange" />
+                                <span>Create Assignment</span>
+                              </div>
+                              <span className="px-2 py-0.5 rounded bg-veda-orange/10 text-[8px] font-bold text-veda-orange animate-pulse">
+                                Active
+                              </span>
+                            </div>
+
+                            <div className="border border-dashed border-veda-orange/30 bg-orange-50/15 rounded-xl p-2.5 my-1.5 text-center flex items-center justify-between gap-2">
                               <div className="flex items-center gap-2">
-                                <Bookmark className="w-3.5 h-3.5 text-veda-orange shrink-0" />
-                                <span className="font-bold text-veda-dark truncate max-w-[180px]">Limits & Derivatives Cheat Sheet</span>
-                              </div>
-                              <span className="text-[8px] text-veda-dark/40 font-semibold shrink-0">Maths</span>
-                            </div>
-
-                            <div className="flex items-center justify-between bg-[#F5F5F7] p-2 rounded-lg border border-black/5">
-                              <div className="flex items-center gap-2">
-                                <Bookmark className="w-3.5 h-3.5 text-veda-orange shrink-0" />
-                                <span className="font-bold text-veda-dark truncate max-w-[180px]">Alkanes & Alkynes Reaction Map</span>
-                              </div>
-                              <span className="text-[8px] text-veda-dark/40 font-semibold shrink-0">Chemistry</span>
-                            </div>
-                          </div>
-
-                          <div className="flex items-center gap-2 bg-[#F5F5F7] rounded-lg p-2 border border-black/5 text-[9px] font-semibold text-veda-dark/60">
-                            <GraduationCap className="w-3.5 h-3.5 text-veda-orange shrink-0" />
-                            <span>Easily organize curriculum by subjects and topics</span>
-                          </div>
-                        </div>
-                      )}
-
-                      {index === 1 && (
-                        /* Card 1: Discovery Hub Mockup */
-                        <div className="flex flex-col h-full justify-between">
-                          <div className="flex items-center justify-between border-b border-black/5 pb-2">
-                            <div className="flex items-center gap-1.5 font-bold text-veda-dark">
-                              <Search className="w-4 h-4 text-veda-orange" />
-                              <span>Resource Discovery</span>
-                            </div>
-                            <span className="text-[9px] font-bold text-veda-dark/40">External Search</span>
-                          </div>
-
-                          <div className="bg-[#F5F5F7] rounded-xl px-3 py-2 flex items-center justify-between text-[11px] border border-black/5 my-1.5">
-                            <div className="flex items-center text-veda-dark font-bold">
-                              <span>Quantum Mechanics</span>
-                              <span className="w-[1.5px] h-3.5 bg-veda-orange ml-0.5"></span>
-                            </div>
-                            <Search className="w-3.5 h-3.5 text-veda-dark/40" />
-                          </div>
-
-                          <div className="flex gap-1.5 my-1 overflow-x-auto pb-1 text-[8px]">
-                            <span className="px-2.5 py-1 rounded-full font-bold bg-veda-orange text-white shadow-sm shrink-0">Physics</span>
-                            <span className="px-2.5 py-1 rounded-full font-bold bg-[#F5F5F7] text-veda-dark/50 border border-black/5 shrink-0">Chemistry</span>
-                            <span className="px-2.5 py-1 rounded-full font-bold bg-[#F5F5F7] text-veda-dark/50 border border-black/5 shrink-0">Biology</span>
-                          </div>
-
-                          <div className="flex flex-col gap-2.5 my-1 text-left">
-                            <div className="bg-[#F5F5F7]/80 rounded-xl p-2.5 border border-black/5 flex justify-between items-center gap-2">
-                              <div className="flex items-center gap-2">
-                                <div className="w-7 h-7 rounded-lg bg-veda-dark text-veda-orange shadow-glow border border-veda-orange/10 flex items-center justify-center shrink-0">
+                                <div className="w-8 h-8 rounded-lg bg-white shadow-sm border border-black/5 flex items-center justify-center text-veda-orange shrink-0">
                                   <BookOpen className="w-4 h-4" />
                                 </div>
+                                <div className="text-left">
+                                  <div className="font-bold text-veda-dark truncate max-w-[130px]">Physics_Ch_4_Force.pdf</div>
+                                  <div className="text-[8px] text-veda-dark/40">2.4 MB &bull; Uploaded</div>
+                                </div>
+                              </div>
+                              <CheckCircle2 className="w-4 h-4 text-[#0E703C] shrink-0" />
+                            </div>
+
+                            <div className="flex gap-2 my-0.5">
+                              <div className="flex-1 bg-[#F5F5F7] border border-black/5 p-1 rounded-lg text-left">
+                                <div className="text-[7px] font-bold text-veda-dark/40 uppercase">Class</div>
+                                <div className="font-bold text-veda-dark text-[9px]">Class 11</div>
+                              </div>
+                              <div className="flex-1 bg-[#F5F5F7] border border-black/5 p-1 rounded-lg text-left">
+                                <div className="text-[7px] font-bold text-veda-dark/40 uppercase">Subject</div>
+                                <div className="font-bold text-veda-dark text-[9px]">Physics</div>
+                              </div>
+                              <div className="flex-1 bg-[#F5F5F7] border border-black/5 p-1 rounded-lg text-left">
+                                <div className="text-[7px] font-bold text-veda-dark/40 uppercase">Difficulty</div>
+                                <div className="font-bold text-veda-orange text-[9px]">Medium</div>
+                              </div>
+                            </div>
+
+                            <div className="bg-[#F5F5F7] border border-black/5 rounded-xl p-2 text-left my-1 relative">
+                              <div className="absolute right-1.5 top-1.5 bg-veda-orange/10 text-[7px] font-bold text-veda-orange px-1.5 py-0.5 rounded">
+                                Subjective
+                              </div>
+                              <span className="text-veda-orange font-bold mr-1">Q1.</span>
+                              <span className="text-veda-dark font-medium leading-normal text-[9px]">State Newton&apos;s second law of motion and derive the formula F = ma.</span>
+                            </div>
+
+                            <div className="flex items-center gap-1.5 bg-[#F5F5F7]/50 rounded-lg p-1.5 border border-dashed border-black/5 text-[8px] font-medium text-veda-dark/40 text-left">
+                              <span className="w-1 h-1 bg-veda-orange rounded-full animate-ping shrink-0" />
+                              <span>Formulating 9 more questions from curriculum...</span>
+                            </div>
+                          </div>
+                        )}
+
+                        {index === 3 && (
+                          /* Card 3: Dashboard Mockup */
+                          <div className="flex flex-col h-full justify-between">
+                            <div className="flex items-center justify-between border-b border-black/5 pb-2">
+                              <div className="flex items-center gap-1.5 font-bold text-veda-dark">
+                                <Image src="/logo.png" alt="Logo" width={14} height={14} className="rounded" />
+                                <span>VedaAI Dashboard</span>
+                              </div>
+                              <div className="flex items-center gap-1.5 text-veda-dark/40">
+                                <span className="text-[9px] font-semibold">Home</span>
+                                <div className="w-4.5 h-4.5 rounded-full bg-veda-orange/10 border border-black/5 relative overflow-hidden">
+                                  <Image
+                                    src="/avatar.svg"
+                                    alt="User"
+                                    fill
+                                    className="object-cover"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="text-left my-1">
+                              <h4 className="font-extrabold text-veda-dark text-xs">Hi Madhur</h4>
+                              <p className="text-[9px] text-veda-dark/50">Ready to review your assignments?</p>
+                            </div>
+
+                            <div className="grid grid-cols-3 gap-1.5 my-1 text-[9px] text-left">
+                              <div className="bg-[#F5F5F7] p-1.5 rounded-lg border border-black/5 flex flex-col justify-between h-[48px]">
+                                <span className="text-[7px] font-bold text-veda-dark/50 leading-tight">Reviewed</span>
+                                <div className="flex items-baseline gap-0.5">
+                                  <span className="font-extrabold text-veda-orange text-xs">67</span>
+                                </div>
+                              </div>
+                              <div className="bg-[#F5F5F7] p-1.5 rounded-lg border border-black/5 flex flex-col justify-between h-[48px]">
+                                <span className="text-[7px] font-bold text-veda-dark/50 leading-tight">Saved by AI</span>
+                                <div className="flex items-baseline gap-0.5">
+                                  <span className="font-extrabold text-veda-dark text-xs">31.7</span>
+                                  <span className="text-[6px] text-veda-dark/40 font-semibold">hrs</span>
+                                </div>
+                              </div>
+                              <div className="bg-[#F5F5F7] p-1.5 rounded-lg border border-black/5 flex flex-col justify-between h-[48px]">
+                                <span className="text-[7px] font-bold text-veda-dark/50 leading-tight">Graded</span>
+                                <div className="flex items-baseline">
+                                  <span className="font-extrabold text-veda-dark text-xs">128</span>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="flex flex-col gap-1.5 my-1 text-[9px] text-left">
+                              <div className="flex items-center justify-between bg-[#F5F5F7]/50 p-1.5 rounded-lg border border-black/5">
                                 <div>
-                                  <div className="font-bold text-veda-dark text-[10px] truncate max-w-[130px]">Intro to Quantum Physics</div>
-                                  <div className="text-[8px] text-veda-dark/40 font-semibold flex items-center gap-1.5">
-                                    <span>Video</span>
-                                    <span>&bull;</span>
-                                    <span>Class 11</span>
-                                  </div>
+                                  <div className="font-bold text-veda-dark text-[9px]">Assignment on Motion</div>
+                                  <div className="text-[7px] text-veda-dark/40">Class 11A &bull; Science</div>
+                                </div>
+                                <div className="flex items-center gap-1.5">
+                                  <span className="text-[8px] font-bold text-veda-dark">50/50</span>
+                                  <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold bg-[#E8F8F0] text-[#0E703C]">Active</span>
                                 </div>
                               </div>
-                              <span className="px-1.5 py-0.5 rounded bg-amber-50 text-amber-700 text-[8px] font-extrabold shrink-0 border border-amber-200">
-                                ★ 4.8
-                              </span>
-                            </div>
 
-                            <div className="bg-[#F5F5F7]/80 rounded-xl p-2.5 border border-black/5 flex justify-between items-center gap-2">
-                              <div className="flex items-center gap-2">
-                                <div className="w-7 h-7 rounded-lg bg-veda-dark text-veda-orange shadow-glow border border-veda-orange/10 flex items-center justify-center shrink-0">
-                                  <GraduationCap className="w-4 h-4" />
-                                </div>
+                              <div className="flex items-center justify-between bg-[#F5F5F7]/50 p-1.5 rounded-lg border border-black/5">
                                 <div>
-                                  <div className="font-bold text-veda-dark text-[10px] truncate max-w-[130px]">Thermodynamics Guide</div>
-                                  <div className="text-[8px] text-veda-dark/40 font-semibold flex items-center gap-1.5">
-                                    <span>PDF Ebook</span>
-                                    <span>&bull;</span>
-                                    <span>Class 12</span>
-                                  </div>
+                                  <div className="font-bold text-veda-dark text-[9px]">Quiz on Electricity</div>
+                                  <div className="text-[7px] text-veda-dark/40">Class 10B &bull; Physics</div>
+                                </div>
+                                <div className="flex items-center gap-1.5">
+                                  <span className="text-[8px] font-bold text-veda-dark text-veda-dark/40">47/50</span>
+                                  <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold bg-[#F4F4F5] text-[#71717A]">Closed</span>
                                 </div>
                               </div>
-                              <span className="px-1.5 py-0.5 rounded bg-amber-50 text-amber-700 text-[8px] font-extrabold shrink-0 border border-amber-200">
-                                ★ 4.9
-                              </span>
-                            </div>
-                          </div>
-
-                          <div className="flex items-center gap-1.5 text-[8px] font-bold text-veda-dark/45 mt-1">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-veda-orange shrink-0" />
-                            <span>Save directly to your folders</span>
-                          </div>
-                        </div>
-                      )}
-
-                      {index === 2 && (
-                        /* Card 2: Question Creator Mockup */
-                        <div className="flex flex-col h-full justify-between">
-                          <div className="flex items-center justify-between border-b border-black/5 pb-2">
-                            <div className="flex items-center gap-1.5 font-bold text-veda-dark">
-                              <Sparkles className="w-4 h-4 text-veda-orange" />
-                              <span>Create Assignment</span>
-                            </div>
-                            <span className="px-2 py-0.5 rounded bg-veda-orange/10 text-[8px] font-bold text-veda-orange animate-pulse">
-                              Active
-                            </span>
-                          </div>
-
-                          <div className="border border-dashed border-veda-orange/30 bg-orange-50/15 rounded-xl p-2.5 my-1.5 text-center flex items-center justify-between gap-2">
-                            <div className="flex items-center gap-2">
-                              <div className="w-8 h-8 rounded-lg bg-white shadow-sm border border-black/5 flex items-center justify-center text-veda-orange shrink-0">
-                                <BookOpen className="w-4 h-4" />
-                              </div>
-                              <div className="text-left">
-                                <div className="font-bold text-veda-dark truncate max-w-[130px]">Physics_Ch_4_Force.pdf</div>
-                                <div className="text-[8px] text-veda-dark/40">2.4 MB &bull; Uploaded</div>
-                              </div>
-                            </div>
-                            <CheckCircle2 className="w-4 h-4 text-[#0E703C] shrink-0" />
-                          </div>
-
-                          <div className="flex gap-2 my-0.5">
-                            <div className="flex-1 bg-[#F5F5F7] border border-black/5 p-1 rounded-lg text-left">
-                              <div className="text-[7px] font-bold text-veda-dark/40 uppercase">Class</div>
-                              <div className="font-bold text-veda-dark text-[9px]">Class 11</div>
-                            </div>
-                            <div className="flex-1 bg-[#F5F5F7] border border-black/5 p-1 rounded-lg text-left">
-                              <div className="text-[7px] font-bold text-veda-dark/40 uppercase">Subject</div>
-                              <div className="font-bold text-veda-dark text-[9px]">Physics</div>
-                            </div>
-                            <div className="flex-1 bg-[#F5F5F7] border border-black/5 p-1 rounded-lg text-left">
-                              <div className="text-[7px] font-bold text-veda-dark/40 uppercase">Difficulty</div>
-                              <div className="font-bold text-veda-orange text-[9px]">Medium</div>
-                            </div>
-                          </div>
-
-                          <div className="bg-[#F5F5F7] border border-black/5 rounded-xl p-2 text-left my-1 relative">
-                            <div className="absolute right-1.5 top-1.5 bg-veda-orange/10 text-[7px] font-bold text-veda-orange px-1.5 py-0.5 rounded">
-                              Subjective
-                            </div>
-                            <span className="text-veda-orange font-bold mr-1">Q1.</span> 
-                            <span className="text-veda-dark font-medium leading-normal text-[9px]">State Newton&apos;s second law of motion and derive the formula F = ma.</span>
-                          </div>
-
-                          <div className="flex items-center gap-1.5 bg-[#F5F5F7]/50 rounded-lg p-1.5 border border-dashed border-black/5 text-[8px] font-medium text-veda-dark/40 text-left">
-                            <span className="w-1 h-1 bg-veda-orange rounded-full animate-ping shrink-0" />
-                            <span>Formulating 9 more questions from curriculum...</span>
-                          </div>
-                        </div>
-                      )}
-
-                      {index === 3 && (
-                        /* Card 3: Dashboard Mockup */
-                        <div className="flex flex-col h-full justify-between">
-                          <div className="flex items-center justify-between border-b border-black/5 pb-2">
-                            <div className="flex items-center gap-1.5 font-bold text-veda-dark">
-                              <Image src="/logo.png" alt="Logo" width={14} height={14} className="rounded" />
-                              <span>VedaAI Dashboard</span>
-                            </div>
-                            <div className="flex items-center gap-1.5 text-veda-dark/40">
-                              <span className="text-[9px] font-semibold">Home</span>
-                              <div className="w-4.5 h-4.5 rounded-full bg-veda-orange/10 border border-black/5 relative overflow-hidden">
-                                <Image
-                                  src="/avatar.svg"
-                                  alt="User"
-                                  fill
-                                  className="object-cover"
-                                />
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="text-left my-1">
-                            <h4 className="font-extrabold text-veda-dark text-xs">Hi Madhur</h4>
-                            <p className="text-[9px] text-veda-dark/50">Ready to review your assignments?</p>
-                          </div>
-
-                          <div className="grid grid-cols-3 gap-1.5 my-1 text-[9px] text-left">
-                            <div className="bg-[#F5F5F7] p-1.5 rounded-lg border border-black/5 flex flex-col justify-between h-[48px]">
-                              <span className="text-[7px] font-bold text-veda-dark/50 leading-tight">Reviewed</span>
-                              <div className="flex items-baseline gap-0.5">
-                                <span className="font-extrabold text-veda-orange text-xs">67</span>
-                              </div>
-                            </div>
-                            <div className="bg-[#F5F5F7] p-1.5 rounded-lg border border-black/5 flex flex-col justify-between h-[48px]">
-                              <span className="text-[7px] font-bold text-veda-dark/50 leading-tight">Saved by AI</span>
-                              <div className="flex items-baseline gap-0.5">
-                                <span className="font-extrabold text-veda-dark text-xs">31.7</span>
-                                <span className="text-[6px] text-veda-dark/40 font-semibold">hrs</span>
-                              </div>
-                            </div>
-                            <div className="bg-[#F5F5F7] p-1.5 rounded-lg border border-black/5 flex flex-col justify-between h-[48px]">
-                              <span className="text-[7px] font-bold text-veda-dark/50 leading-tight">Graded</span>
-                              <div className="flex items-baseline">
-                                <span className="font-extrabold text-veda-dark text-xs">128</span>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="flex flex-col gap-1.5 my-1 text-[9px] text-left">
-                            <div className="flex items-center justify-between bg-[#F5F5F7]/50 p-1.5 rounded-lg border border-black/5">
-                              <div>
-                                <div className="font-bold text-veda-dark text-[9px]">Assignment on Motion</div>
-                                <div className="text-[7px] text-veda-dark/40">Class 11A &bull; Science</div>
-                              </div>
-                              <div className="flex items-center gap-1.5">
-                                <span className="text-[8px] font-bold text-veda-dark">50/50</span>
-                                <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold bg-[#E8F8F0] text-[#0E703C]">Active</span>
-                              </div>
                             </div>
 
-                            <div className="flex items-center justify-between bg-[#F5F5F7]/50 p-1.5 rounded-lg border border-black/5">
-                              <div>
-                                <div className="font-bold text-veda-dark text-[9px]">Quiz on Electricity</div>
-                                <div className="text-[7px] text-veda-dark/40">Class 10B &bull; Physics</div>
-                              </div>
-                              <div className="flex items-center gap-1.5">
-                                <span className="text-[8px] font-bold text-veda-dark text-veda-dark/40">47/50</span>
-                                <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold bg-[#F4F4F5] text-[#71717A]">Closed</span>
-                              </div>
+                            <div className="flex justify-end mt-1">
+                              <button className="bg-[#1F1F1F] text-white rounded-full px-2.5 py-1 text-[8px] font-bold flex items-center gap-1 shadow-glow border border-veda-orange/20 hover:bg-black transition-colors">
+                                <Sparkles className="w-2.5 h-2.5 text-veda-orange animate-pulse" />
+                                <span>Create Assignment</span>
+                              </button>
                             </div>
                           </div>
-
-                          <div className="flex justify-end mt-1">
-                            <button className="bg-[#1F1F1F] text-white rounded-full px-2.5 py-1 text-[8px] font-bold flex items-center gap-1 shadow-glow border border-veda-orange/20 hover:bg-black transition-colors">
-                              <Sparkles className="w-2.5 h-2.5 text-veda-orange animate-pulse" />
-                              <span>Create Assignment</span>
-                            </button>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-          </div>
-        </section>
-      </div>
+          </section>
+        </div>
 
         {/* Value Prop Statement */}
         <section className="max-w-6xl mx-auto px-6 text-center mb-32" id="about">
@@ -476,16 +473,16 @@ export default function Home() {
               const wordProgress = index / arr.length;
               const start = wordProgress * 0.85;
               const end = start + 0.15;
-              
+
               let wordP = (scrollProgress - start) / (end - start);
               if (wordP < 0) wordP = 0;
               if (wordP > 1) wordP = 1;
-              
+
               const opacity = 0.25 + wordP * 0.75;
-              
+
               return (
-                <span 
-                  key={index} 
+                <span
+                  key={index}
                   style={{ color: `rgba(31, 31, 31, ${opacity})` }}
                 >
                   {word}{index < arr.length - 1 ? " " : ""}
@@ -595,7 +592,7 @@ export default function Home() {
               <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white/40 border border-black/5 shadow-sm flex items-center justify-center p-4">
                 <div className="bg-white rounded-2xl p-5 shadow-md border border-black/5 flex flex-col gap-3.5 w-full max-w-[340px] h-[220px]">
                   <div className="text-xs font-bold text-veda-dark text-left">Search Academic Resources</div>
-                  
+
                   <div className="bg-[#F5F5F7] rounded-xl px-4 py-2 flex items-center justify-between text-xs border border-black/5">
                     <div className="flex items-center text-veda-dark font-semibold">
                       <span>Quantum</span>
@@ -673,11 +670,11 @@ export default function Home() {
                 <div className="bg-white rounded-2xl p-5 shadow-md border border-black/5 flex flex-col justify-between w-full max-w-[340px] h-[220px] relative overflow-hidden">
                   {/* Orange background shapes as seen in reference image */}
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-veda-orange/5 rounded-full blur-2xl pointer-events-none" />
-                  
+
                   {/* Beautiful orbiting orange rings */}
                   <div className="absolute -top-10 -right-10 w-28 h-28 rounded-full border-4 border-dashed border-veda-orange/20 animate-[spin_40s_linear_infinite]" />
                   <div className="absolute -bottom-8 -left-8 w-24 h-24 rounded-full border-[3px] border-veda-orange/30" />
-                  
+
                   <div className="flex items-center justify-between border-b border-black/5 pb-2.5 z-10">
                     <span className="text-xs font-bold text-veda-dark flex items-center gap-1.5">
                       <Sparkles className="w-3.5 h-3.5 text-veda-orange" />
@@ -695,7 +692,7 @@ export default function Home() {
                         <CheckCircle2 className="w-3 h-3" />
                       </div>
                     </div>
-                    
+
                     <div className="bg-[#F5F5F7]/75 rounded-lg p-2 text-[10px] font-medium text-veda-dark/50 italic border border-dashed border-black/5">
                       Generating subjective & MCQs from "Physics_Ch3.pdf"...
                     </div>
@@ -833,7 +830,8 @@ export default function Home() {
         </p>
       </footer>
 
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @keyframes fadeInUp {
           from {
             opacity: 0;

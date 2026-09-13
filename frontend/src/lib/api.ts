@@ -43,6 +43,17 @@ async function request<T>(
   );
 
   if (!res.ok) {
+    if (res.status === 401) {
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("veda-auth");
+        localStorage.removeItem("veda-last-active");
+        const pathname = window.location.pathname;
+        if (pathname !== "/login" && pathname !== "/signup" && pathname !== "/") {
+          window.location.href = "/login?reason=session_expired";
+        }
+      }
+    }
+
     const err = await res
       .json()
       .catch(() => ({
@@ -114,6 +125,15 @@ export async function login(data: {
       method: "POST",
 
       body: JSON.stringify(data),
+    }
+  );
+}
+
+export async function refreshToken() {
+  return request<AuthResponse>(
+    "/api/auth/refresh",
+    {
+      method: "POST",
     }
   );
 }
